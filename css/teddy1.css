@@ -1,0 +1,34 @@
+
+
+.teddy1 {
+    height: 500px;
+    width: 500px;
+}
+
+.price {
+    color:#FFD700;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+input {
+    border: 1px solid #ccc;
+    height: 30px;
+    width: 50px;
+    text-align: center;
+}
+
+.btn {
+    margin-left: 20px;
+}
+
+.col-md-7 {
+    margin-top: 80px;
+}
+
+.btn-tan {
+    background-color: #D2B48C !important;
+}
+.btn-chocolate {
+    background-color: #7B3F00 !important;
+}
