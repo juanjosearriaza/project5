@@ -19,8 +19,8 @@ function getNames() {
         let queryString = '?id=' + data[i]._id;
 
         html += `<div class="col-12 col-lg-4">
-  <div class="card mb-4 mb-lg-0">
-      <img src="${data[i].imageUrl}" alt="teddy" class="card-img-top">
+  <div class="card mb-4 mb-lg-4">
+      <img src="${data[i].imageUrl}" alt="teddy" class="card-img-top" style="height:250px">
       <div class="card-body text-center">
           <h5 class="card-title teddy">${data[i].name}</h5>
           <h6 class="card-title price">Price: $ ${data[i].price}</h6>
