@@ -1,11 +1,6 @@
 const images = document.getElementsByClassName("teddycarousel")
 
 
-
-
-
-
-
 function getNames() {
 
   fetch('http://localhost:3000/api/teddies')

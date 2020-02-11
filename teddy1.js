@@ -15,7 +15,7 @@ id = id.replace("?id=","");
 
 let URL = 'http://localhost:3000/api/teddies/'+ id
 
-console.log(URL);
+
 
 function getNames () {fetch(URL)
 .then((res) => res.json())
