@@ -54,28 +54,25 @@ function addItems() {
     .then(res => res.json())
     .then(data => {
       let cart = localStorage.getItem("cart") || [];
+      let quantity = localStorage.getItem("quantity");
+      quantity = parseInt(quantity);
 
       if (typeof cart === "string") {
         cart = JSON.parse(cart);
       }
       let find;
       for (let i = 0; i < cart.length; i++) {
-          console.log(cart[i].id);
         if (cart[i].id == id) {
           find = i;
-          break
         }
       }
-console.log(find);
-      //TO DO
-      //Find out if the teddy bear is there and if it´s there increase the quantity
+
       document.querySelector(".cartspan span").textContent = parseInt(
         input.value
       );
 
-      if (find) {
-        cart[find].quantity = parseInt(input.value);
-        
+      if (find !== undefined) {
+        cart[find].quantity += parseInt(input.value);
       } else {
         cart.push({
           quantity: parseInt(input.value),
@@ -83,23 +80,19 @@ console.log(find);
           price: data.price,
           id: id
         });
-        
       }
-      localStorage.removeItem("cart")
+      localStorage.removeItem("cart");
       localStorage.setItem("cart", JSON.stringify(cart));
-      /*if (productNumbers) {
-        localStorage.setItem(
-          "productNumbers",
-          parseInt(input.value) + productNumbers
-        );
+      if (quantity) {
+        localStorage.setItem("quantity", parseInt(input.value) + quantity);
         document.querySelector(".cartspan span").textContent =
-          parseInt(input.value) + productNumbers;
+          parseInt(input.value) + quantity;
       } else {
-        localStorage.setItem("productNumbers", parseInt(input.value));
+        localStorage.setItem("quantity", parseInt(input.value));
         document.querySelector(".cartspan span").textContent = parseInt(
           input.value
         );
-      }*/
+      }
     });
 }
 
