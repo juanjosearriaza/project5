@@ -39,4 +39,12 @@ function getNames() {
 
 getNames();
 
+function onLoadCart() {
+  let quantity = localStorage.getItem("quantity");
 
+  if (quantity) {
+    document.querySelector(".cartspan span").textContent = quantity;
+  }
+}
+
+onLoadCart();

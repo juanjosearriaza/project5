@@ -9,7 +9,6 @@ const colorwhite = document.getElementsByClassName("btn-light");
 const colorblack = document.getElementsByClassName("btn-dark");
 const addToCart = document.querySelector(".cart");
 const input = document.querySelector("input");
-
 let id = location.search;
 
 id = id.replace("?id=", "");
@@ -20,13 +19,13 @@ function getNames() {
   fetch(URL)
     .then(res => res.json())
     .then(data => {
-      let output = "Price: USD: ";
+      let output = "Price: $ ";
       let output1 = "<strong> Description: </strong>";
 
       image[0].src = data.imageUrl;
       name.textContent = data.name;
       code[0].textContent = data._id;
-      price[0].textContent = output + data.price;
+      price[0].textContent = output + data.price/100 + ".00";
       description[0].innerHTML = output1 + data.description;
       colortan[0].textContent = data.colors[0];
       colorchocolate[0].textContent = data.colors[1];
@@ -39,13 +38,14 @@ getNames();
 
 addToCart.addEventListener("click", () => {
   addItems();
+  
 });
 
 function onLoadCart() {
-  let productNumbers = localStorage.getItem("productNumbers");
+  let quantity = localStorage.getItem("quantity");
 
-  if (productNumbers) {
-    document.querySelector(".cartspan span").textContent = productNumbers;
+  if (quantity) {
+    document.querySelector(".cartspan span").textContent = quantity;
   }
 }
 
@@ -56,7 +56,7 @@ function addItems() {
       let cart = localStorage.getItem("cart") || [];
       let quantity = localStorage.getItem("quantity");
       quantity = parseInt(quantity);
-
+      
       if (typeof cart === "string") {
         cart = JSON.parse(cart);
       }
@@ -78,10 +78,11 @@ function addItems() {
           quantity: parseInt(input.value),
           name: data.name,
           price: data.price,
-          id: id
+          id: id,
+          image:data.imageUrl,
         });
       }
-      localStorage.removeItem("cart");
+
       localStorage.setItem("cart", JSON.stringify(cart));
       if (quantity) {
         localStorage.setItem("quantity", parseInt(input.value) + quantity);
