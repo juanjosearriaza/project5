@@ -6,24 +6,31 @@ let address = document.getElementById("address");
 let postCode = document.getElementById("postcode");
 let city = document.getElementById("city");
 let erase = document.getElementsByClassName("fa-window-close");
+let input = document.getElementsByClassName("quantity");
 
 
 function eraseProduct() {
   for (let i = 0; i < erase.length; i++) {
     erase[i].addEventListener("click", function() {
       let cart = localStorage.getItem("cart") || [];
-
+      let quantity = localStorage.getItem("quantity")
+      quantity = JSON.parse(quantity)
+      let newQuantity = quantity - parseInt(input[i].value)
       if (typeof cart === "string") {
         cart = JSON.parse(cart);
       }
+      console.log(newQuantity)
       
       cart.splice(i, 1)
+      localStorage.setItem("quantity", JSON.stringify(newQuantity));
       localStorage.setItem("cart", JSON.stringify(cart));
       location.reload(true);
       
     });
   }
 }
+
+
 
 function getTotalCost() {
   let cart = localStorage.getItem("cart") || [];
