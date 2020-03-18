@@ -7,26 +7,32 @@ let postCode = document.getElementById("postcode");
 let city = document.getElementById("city");
 let erase = document.getElementsByClassName("fa-window-close");
 
-console.log(erase);
 
-for (let i = 0; i < erase.length; i++) {
-  erase[i].addEventListener("click", function () {
-    console.log("hello");
-  })
+function eraseProduct() {
+  for (let i = 0; i < erase.length; i++) {
+    erase[i].addEventListener("click", function() {
+      let cart = localStorage.getItem("cart") || [];
+
+      if (typeof cart === "string") {
+        cart = JSON.parse(cart);
+      }
+      
+      cart.splice(i, 1)
+      localStorage.setItem("cart", JSON.stringify(cart));
+      location.reload(true);
+      
+    });
+  }
 }
-
-
-
 
 function getTotalCost() {
   let cart = localStorage.getItem("cart") || [];
-  
+
   if (typeof cart === "string") {
     cart = JSON.parse(cart);
   }
   let totalCost = 0;
   let html = ``;
-
 
   for (let i = 0; i < cart.length; i++) {
     totalCost += cart[i].quantity * cart[i].price;
@@ -42,16 +48,10 @@ function getTotalCost() {
       }" min="1" style="width:45px"></div>
       <div class="col-3 mt-5 text-center">$${cart[i].price / 100}.00</div>
       `;
-      
   }
   document.querySelector(".createcart").innerHTML = html;
   document.querySelector(".price").textContent =
     "Total to pay  $" + totalCost / 100 + ".00";
-
-
-
-  console.log(finishshopping);
-  console.log(totalCost);
 }
 
 getTotalCost();
@@ -95,9 +95,8 @@ finishshopping.addEventListener("click", function(event) {
   })
     .then(response => response.json())
     .then(json => {
-      
       localStorage.setItem("orderId", JSON.stringify(json));
-      location.href = "confirmation.html"
-      localStorage.clear()}
-    );
+      location.href = "confirmation.html";
+    
+    });
 });

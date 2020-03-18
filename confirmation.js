@@ -10,4 +10,6 @@ for (let i = 0; i < cart.length; i++) {
     document.querySelector(".col-12").innerHTML = "Thanks for shopping with us, your orderId is " + orderId.orderId + " and the total cost is $" + totalCost/100 +".00."
   }
 
-
+function emptyCart() {
+  localStorage.clear()
+}
