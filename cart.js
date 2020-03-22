@@ -7,30 +7,42 @@ let postCode = document.getElementById("postcode");
 let city = document.getElementById("city");
 let erase = document.getElementsByClassName("fa-window-close");
 let input = document.getElementsByClassName("quantity");
+let form = document.querySelector(".needs-validation");
 
 
 function eraseProduct() {
   for (let i = 0; i < erase.length; i++) {
     erase[i].addEventListener("click", function() {
       let cart = localStorage.getItem("cart") || [];
-      let quantity = localStorage.getItem("quantity")
-      quantity = JSON.parse(quantity)
-      let newQuantity = quantity - parseInt(input[i].value)
+      let quantity = localStorage.getItem("quantity");
+      quantity = JSON.parse(quantity);
+      let newQuantity = quantity - parseInt(input[i].value);
       if (typeof cart === "string") {
         cart = JSON.parse(cart);
       }
-      console.log(newQuantity)
-      
-      cart.splice(i, 1)
+
+      cart.splice(i, 1);
       localStorage.setItem("quantity", JSON.stringify(newQuantity));
       localStorage.setItem("cart", JSON.stringify(cart));
       location.reload(true);
-      
     });
   }
 }
 
+function changeQuantity() {
+  for (let i = 0; i < input.length; i++) {
+    input[i].addEventListener("change", function() {
+      let cart = localStorage.getItem("cart") || [];
+      if (typeof cart === "string") {
+        cart = JSON.parse(cart);
+      }
 
+      cart[i].quantity = parseInt(input[i].value);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      location.reload(true);
+    });
+  }
+}
 
 function getTotalCost() {
   let cart = localStorage.getItem("cart") || [];
@@ -40,9 +52,13 @@ function getTotalCost() {
   }
   let totalCost = 0;
   let html = ``;
+  let newQuantity = 0;
 
   for (let i = 0; i < cart.length; i++) {
     totalCost += cart[i].quantity * cart[i].price;
+    newQuantity += cart[i].quantity;
+    localStorage.setItem("quantity", JSON.stringify(newQuantity));
+
 
     html += `
       <div class="col-1 mt-5"><i class="fas fa-window-close" style="color:#007bff;"></i></div>
@@ -85,6 +101,8 @@ finishshopping.addEventListener("click", function(event) {
     city: city.value
   };
 
+  
+  
   let cart = localStorage.getItem("cart") || [];
   cart = JSON.parse(cart);
 
@@ -104,6 +122,13 @@ finishshopping.addEventListener("click", function(event) {
     .then(json => {
       localStorage.setItem("orderId", JSON.stringify(json));
       location.href = "confirmation.html";
-    
     });
+});
+
+form.addEventListener("submit", function(event) {
+  if (form.checkValidity() === false) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  form.classList("was-validated");
 });

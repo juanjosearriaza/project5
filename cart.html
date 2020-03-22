@@ -24,7 +24,7 @@
     <title>Shopping Cart</title>
 </head>
 
-<body onload="eraseProduct()">
+<body onload="eraseProduct();changeQuantity()">
     <div class="bg-dark">
         <div class="container">
             <div class="row">
@@ -68,6 +68,7 @@
             <div class="col-9 mt-4"></div>
             <div class="col-3 mt-4 price"></div>            
         </div>
+    <form class="needs-validation" novalidate>
         <div class="row">
             <div class="col-sm-12 col-lg-4 mt-2">
                 <div class="form-group">
@@ -116,7 +117,9 @@
               </label>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary" id="finish">Submit Form</button>
+        
+          <button type="submit" class="btn btn-primary" id="finish" disabled>Submit Form</button>
+    </form>
 
     </div>
 
