@@ -11,6 +11,7 @@ const addToCart = document.querySelector(".cart");
 const input = document.querySelector("input");
 let id = location.search;
 
+
 id = id.replace("?id=", "");
 
 let URL = "http://localhost:3000/api/teddies/" + id;
@@ -56,7 +57,8 @@ function addItems() {
       let cart = localStorage.getItem("cart") || [];
       let quantity = localStorage.getItem("quantity");
       quantity = parseInt(quantity);
-      
+      $('.toast').toast('show');
+
       if (typeof cart === "string") {
         cart = JSON.parse(cart);
       }
