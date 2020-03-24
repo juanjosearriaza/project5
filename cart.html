@@ -68,24 +68,30 @@
             <div class="col-9 mt-4"></div>
             <div class="col-3 mt-4 price"></div>            
         </div>
-    <form class="needs-validation" novalidate>
+    <form  id="finish" class="needs-validation">
         <div class="row">
             <div class="col-sm-12 col-lg-4 mt-2">
                 <div class="form-group">
                     <label for="firstName">First Name:</label>
-                    <input type="text" class="form-control" id="firstname" placeholder="First Name" name="First Name" required>
+                    <input type="text" class="form-control" id="firstname" placeholder="First Name" name="firstName" required/>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
                   </div>
             </div>
             <div class="col-sm-12 col-lg-4 mt-2">
                 <div class="form-group">
                     <label for="lastName">Last Name:</label>
-                    <input type="text" class="form-control" id="lastname" placeholder="Last Name" name="Last Name" required>
+                    <input type="text" class="form-control" id="lastname" placeholder="Last Name" name="lastName" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
                   </div>
             </div>
             <div class="col-sm-12 col-lg-4 mt-2">
                 <div class="form-group">
                     <label for="email">Email Address:</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter your email address" name="Email Address" required>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email address" name="email" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
                 </div>
             </div>
         </div>
@@ -93,19 +99,25 @@
             <div class="col-sm-12 col-lg-6 mt-1">
                 <div class="form-group">
                     <label for="address">Address:</label>
-                    <input type="text" class="form-control" id="address" placeholder="Enter your address" name="Address" required>
+                    <input type="text" class="form-control" id="address" placeholder="Enter your address" name="address" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
                   </div>
             </div>
             <div class="col-sm-12 col-lg-2 mt-1">
                 <div class="form-group">
                     <label for="postcode">Post Code:</label>
-                    <input type="text" class="form-control" id="postcode" placeholder="Post code" name="Post Code" required>
+                    <input type="text" class="form-control" id="postcode" placeholder="Post code" name="postcode" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
                 </div>
             </div>
             <div class="col-sm-12 col-lg-4 mt-1">
                 <div class="form-group">
                     <label for="city">City:</label>
-                    <input type="text" class="form-control" id="city" placeholder="Enter your city" name="City" required>
+                    <input type="text" class="form-control" id="city" placeholder="Enter your city" name="city" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
                   </div>
             </div>            
         </div>
@@ -118,7 +130,7 @@
             </div>
           </div>
         
-          <button type="submit" class="btn btn-primary" id="finish" disabled>Submit Form</button>
+          <button type="submit" class="btn btn-primary" >Submit Form</button>
     </form>
 
     </div>

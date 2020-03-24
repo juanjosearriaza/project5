@@ -46,6 +46,7 @@ function changeQuantity() {
 
 function getTotalCost() {
   let cart = localStorage.getItem("cart") || [];
+  
 
   if (typeof cart === "string") {
     cart = JSON.parse(cart);
@@ -89,7 +90,7 @@ function onLoadCart() {
 
 onLoadCart();
 
-finishshopping.addEventListener("click", function(event) {
+finishshopping.addEventListener("submit", function(event) {
   event.preventDefault();
   let productId = [];
   let contact = {
@@ -101,8 +102,7 @@ finishshopping.addEventListener("click", function(event) {
     city: city.value
   };
 
-  
-  
+   
   let cart = localStorage.getItem("cart") || [];
   cart = JSON.parse(cart);
 
@@ -125,10 +125,3 @@ finishshopping.addEventListener("click", function(event) {
     });
 });
 
-form.addEventListener("submit", function(event) {
-  if (form.checkValidity() === false) {
-    event.preventDefault();
-    event.stopPropagation();
-  }
-  form.classList("was-validated");
-});
