@@ -11,6 +11,38 @@ const addToCart = document.querySelector(".cart");
 const input = document.querySelector("input");
 let id = location.search;
 
+function ShoppingCart(cart) {
+  this.cart = cart;
+}
+
+ShoppingCart.prototype.locateFind = function (id, cart) {
+  this.cart = localStorage.getItem("cart") || [];
+
+  if (typeof this.cart === "string") {
+    this.cart = JSON.parse(cart);
+  }
+  let find;
+  for (let i = 0; i < this.cart.length; i++) {
+    if (this.cart[i].id == id) {
+      find = i;
+    }
+  }
+  return find;
+};
+
+ShoppingCart.prototype.createCart = function (find, input, data, id) {
+  if (find !== undefined) {
+    teddy.cart[find].quantity += parseInt(input.value);
+  } else {
+    teddy.cart.push({
+      quantity: parseInt(input.value),
+      name: data.name,
+      price: data.price,
+      id: id,
+      image: data.imageUrl,
+    });
+  }
+};
 
 id = id.replace("?id=", "");
 
@@ -18,15 +50,15 @@ let URL = "http://localhost:3000/api/teddies/" + id;
 
 function getNames() {
   fetch(URL)
-    .then(res => res.json())
-    .then(data => {
+    .then((res) => res.json())
+    .then((data) => {
       let output = "Price: $ ";
       let output1 = "<strong> Description: </strong>";
 
       image[0].src = data.imageUrl;
       name.textContent = data.name;
       code[0].textContent = data._id;
-      price[0].textContent = output + data.price/100 + ".00";
+      price[0].textContent = output + data.price / 100 + ".00";
       description[0].innerHTML = output1 + data.description;
       colortan[0].textContent = data.colors[0];
       colorchocolate[0].textContent = data.colors[1];
@@ -39,7 +71,6 @@ getNames();
 
 addToCart.addEventListener("click", () => {
   addItems();
-  
 });
 
 function onLoadCart() {
@@ -50,42 +81,30 @@ function onLoadCart() {
   }
 }
 
+onLoadCart();
+
 function addItems() {
   fetch(URL)
-    .then(res => res.json())
-    .then(data => {
+    .then((res) => res.json())
+    .then((data) => {
       let cart = localStorage.getItem("cart") || [];
       let quantity = localStorage.getItem("quantity");
       quantity = parseInt(quantity);
-      $('.toast').toast('show');
+      teddy = new ShoppingCart(cart);
 
-      if (typeof cart === "string") {
-        cart = JSON.parse(cart);
-      }
-      let find;
-      for (let i = 0; i < cart.length; i++) {
-        if (cart[i].id == id) {
-          find = i;
-        }
-      }
+      let find = teddy.locateFind(id, cart);
+      
+
+      teddy.locateFind(id, cart);
+      teddy.createCart(find, input, data, id);
+
+      $(".toast").toast("show");
 
       document.querySelector(".cartspan span").textContent = parseInt(
         input.value
       );
 
-      if (find !== undefined) {
-        cart[find].quantity += parseInt(input.value);
-      } else {
-        cart.push({
-          quantity: parseInt(input.value),
-          name: data.name,
-          price: data.price,
-          id: id,
-          image:data.imageUrl,
-        });
-      }
-
-      localStorage.setItem("cart", JSON.stringify(cart));
+      localStorage.setItem("cart", JSON.stringify(teddy.cart));
       if (quantity) {
         localStorage.setItem("quantity", parseInt(input.value) + quantity);
         document.querySelector(".cartspan span").textContent =
@@ -98,5 +117,3 @@ function addItems() {
       }
     });
 }
-
-onLoadCart();

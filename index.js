@@ -23,7 +23,7 @@ function getNames() {
       <img src="${data[i].imageUrl}" alt="teddy" class="card-img-top" style="height:250px">
       <div class="card-body text-center">
           <h5 class="card-title teddy">${data[i].name}</h5>
-          <h6 class="card-title price">Price: $ ${data[i].price}</h6>
+          <h6 class="card-title price">Price: $ ${data[i].price/100}.00</h6>
           <a class="btn btn-primary" href="detail.html${queryString}">See Article</a>
       </div>
   </div>
